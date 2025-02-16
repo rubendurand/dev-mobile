@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -92,7 +94,7 @@ fun HomeScreen(navController: NavHostController) {
     ){
         Text(text = "Bienvenue dans ma première applicaiton compose navigation",
             style = MaterialTheme.typography.titleMedium)
-        Spacer(modifier = Modifier.height(24.dp))
+        Spacer(modifier = Modifier.height(24.dp).width(24.dp))
         Button(onClick = {navController.navigate("form")}) {
             Text(text = "Accéder au formulaire")
         }
@@ -114,6 +116,17 @@ fun FormScreen(navController: NavHostController) {
             onClick = { navController.popBackStack() }) {
             Text(text = "Retour")
         }
+
+        var name by remember { mutableStateOf("")}
+
+        TextField(
+            value = name,
+            onValueChange = {newText -> name = newText},
+            label = { Text("Entrez votre nom")},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        )
     }
 }
 
